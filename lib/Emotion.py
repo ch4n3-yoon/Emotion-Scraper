@@ -1,6 +1,6 @@
 # coding: utf-8
 
-import sys
+import json
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
@@ -18,7 +18,13 @@ def get_emotion(query) -> float:
     query = query.encode().decode('utf-8')
     url = 'https://demo.pingpong.us/api/sentiment.php'
     resp = requests.get(url, params={'queries': query}, verify=False, headers=headers)
-    resp_json = resp.json()
+    try:
+        resp_json = resp.json()
+    except json.decoder.JSONDecodeError:
+        print('[ ERROR ] Json Decode Error')
+        print(resp.text)
+
+        return 0.0
 
     # For debugging
     # print(resp_json)
