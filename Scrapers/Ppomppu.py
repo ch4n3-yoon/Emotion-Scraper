@@ -54,7 +54,7 @@ class EmotionScraper:
         return {'title': title, 'content': content}
 
     def get_emotions(self):
-        csv_file = open('Ppomppu.csv', 'w')
+        csv_file = open('Ppomppu.csv', 'w', newline='', encoding='UTF-8')
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(('#', 'title', 'content', 'posneg'))
 
